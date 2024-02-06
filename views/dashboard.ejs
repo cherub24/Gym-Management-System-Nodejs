@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+        }
+
+        #sidebar {
+            width: 250px;
+            height: 100%;
+            background: #343a40;
+            color: #fff;
+            position: fixed;
+            transition: margin-left 0.3s;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        #content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        #sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        #sidebar a i {
+            margin-right: 10px;
+        }
+
+        #sidebar a:hover {
+            background: #46505a;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-left: 30px;
+        }
+
+        #sidebar ul li {
+            padding: 8px;
+        }
+
+        #sidebar ul a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        #sidebar ul a:hover {
+            color: #fff;
+        }
+
+        #toggle-btn {
+            background: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* Initially hide the dropdown menu */
+        .dropdown-menu {
+            display: none;
+        }
+
+        /* Show the dropdown when its parent has the 'show' class */
+        .dropdown.show .dropdown-menu {
+            display: block;
+        }
+
+        /* Add a class to show/hide department content */
+        .department-panel {
+            display: none;
+        }
+
+        .department-panel.active {
+            display: block;
+        }
+
+
+
+        /*for report box*/
+        #report-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .report-box:hover{
+        flex: 1 0 calc(25% - 20px);
+        margin: 10px;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transform: scale(1.02);
+        transition: transform 0.3s ease-in-out;
+    }
+    .report-box {
+        flex: 1 0 calc(25% - 20px);
+        margin: 10px;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .report-box h3 {
+        color: #333;
+    }
+
+    .report-box p {
+        color: #666;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar" class="bg-dark">
+        <button id="toggle-btn" class="btn btn-dark">&#9776;</button>
+        <a href="#" class="btn btn-dark"><i class="fas fa-home"></i> Dashboard</a>
+        <div class="dropdown">
+            <!-- Add the class "department-link" for identifying the department link -->
+            <a href="#" class="nav-link dropdown-toggle department-link" id="usersDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-users"></i> Member
+            </a>
+            <div class="dropdown-menu" aria-labelledby="usersDropdown">
+                <!-- Add the data-target attribute with the ID of the corresponding panel -->
+                <a class="dropdown-item department-panel-link" href="/members/new" data-target="member-panel">Add New Member</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/members/eurobics"><i class="fas fa-users"></i> Eurobics Members</a>
+                <a class="dropdown-item" href="/members/tekwando"><i class="fas fa-users"></i> Tekwando Members</a>
+                <a class="dropdown-item" href="/members/weightlift"><i class="fas fa-users"></i> Weight Lift Members</a>
+                <a class="dropdown-item" href="/members/personaltrain"><i class="fas fa-users"></i> Personal Train Members</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/member-types/new"><i class="fas fa-users"></i> Member Types</a>
+                <a class="dropdown-item" href="/member-types"><i class="fas fa-users"></i> Member Types list</a>
+                <a class="dropdown-item" href="/members">Member List</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Equipment
+            </a>
+            
+            
+            <div class="dropdown-menu" aria-labelledby="dropdown2">
+                <a class="dropdown-item" href="/gym-materials/new">Equipment</a>
+                <a class="dropdown-item" href="/gym-materials">Equipment list</a>
+            </div>
+        </div>
+
+
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Staff
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown2">
+                <a class="dropdown-item" href="/gym-staff/new">Add New Staff</a>
+                <a class="dropdown-item" href="/gym-staff">Staff List</a>
+                <a class="dropdown-item" href="/gym-staff-counters">Total counter staff</a>
+                <a class="dropdown-item" href="#">Weight lift</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Payment
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown2">
+                <a class="dropdown-item" href="/payment-plans/new">Payment Plan</a>
+                <a class="dropdown-item" href="/report/unpaid-members">Unpaid member</a>
+                <a class="dropdown-item" href="/report/paid-members">Paid member</a>
+                <a class="dropdown-item" href="/payment-plans">Payment List</a>
+
+            </div>
+        </div>
+
+        <a href="report/monthly-income"><i class="fas fa-cog"></i> Total Monthly Income</a>
+        <a href="/gym-material-counters"><i class="fas fa-cog"></i> Total Material Cost</a>
+
+        
+
+
+        <a href="#"><i class="fas fa-cog"></i> User Management</a>
+
+
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    </div>
+
+    <div id="content">
+        <!-- Add a unique ID for the department panel -->
+        <div id="department-panel" class="panel department-panel">
+            <h1>Department Panel</h1>
+            <!-- Add your department-related content here -->
+            <!-- You can use forms, tables, or any other elements based on your requirements -->
+        </div><!-- Add this inside the #content div, below the department panel -->
+      
+        <!-- Add this inside the #content div, below the department panel -->
+<div id="report-boxes">
+    <div class="report-box" id="number-of-members-box">
+        <h3>Number of Members</h3>
+        <p id="number-of-members">Loading...</p>
+    </div>
+
+
+    <div class="report-box" id="number-of-paid-members-box">
+        <h3>Number of Paid Members</h3>
+        <p id="number-of-paid-members">Loading...</p>
+    </div>
+    
+
+    <div id="number-of-unpaid-members-box" class="report-box">
+        <h4>Number of Unpaid Members</h4>
+        <p id="number-of-unpaid-members">Loading...</p>
+    </div>
+
+    <div class="report-box">
+        <h3>Equipment</h3>
+        <p>Report 4 content goes here.</p>
+    </div>
+
+    <!-- Second Row -->
+    <div class="report-box">
+        <h3>Staff</h3>
+        <p>Report 5 content goes here.</p>
+    </div>
+    <div class="report-box">
+        <h3>User Manegement</h3>
+        <p>Report 6 content goes here.</p>
+    </div>
+   
+    <div class="report-box">
+        <h3>Total Monthly Income</h3>
+        <p id="monthly-income-report"></p>
+    </div>
+    
+    
+    <div class="report-box">
+        <h3>Total Expense</h3>
+        <p>Report 8 content goes here.</p>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+    <script>
+        // Toggle sidebar on button click
+        $("#toggle-btn").click(function() {
+            $("#sidebar").toggleClass("active");
+            $("#content").toggleClass("active");
+        });
+
+        // Toggle dropdown menu visibility when Users link is clicked
+        $(".dropdown .nav-link").click(function() {
+            $(this).closest(".dropdown").toggleClass("show");
+        });
+
+        // Show/hide department panel based on department link click
+        $(".department-link").click(function() {
+            var targetPanel = $(this).data("target");
+            $(".department-panel").removeClass("active");
+            $("#" + targetPanel).addClass("active");
+        });
+    </script>
+
+<script>
+    // Fetch the number of members and update the counter
+    async function updateNumberOfMembers() {
+        try {
+            const response = await fetch('/report/number-of-members');
+            const data = await response.json();
+
+            const numberOfMembersElement = document.getElementById('number-of-members');
+            numberOfMembersElement.textContent = data.numberOfMembers;
+        } catch (error) {
+            console.error('Error updating number of members:', error);
+        }
+    }
+
+    // Call the function to update the number of members on page load
+    updateNumberOfMembers();
+</script>
+
+<!-- Update the existing script or add a new one-->
+<script>
+    // Fetch the number of paid members and update the counter
+    async function updateNumberOfPaidMembers() {
+        try {
+            const response = await fetch('/report/number-of-paid-members');
+            const data = await response.json();
+
+            const numberOfPaidMembersElement = document.getElementById('number-of-paid-members');
+            numberOfPaidMembersElement.textContent = data.numberOfPaidMembers;
+        } catch (error) {
+            console.error('Error updating number of paid members:', error);
+        }
+    }
+
+    // Call the function to update the number of paid members on page load
+    updateNumberOfPaidMembers();
+</script>
+
+
+
+<script>
+    // Fetch the number of unpaid members and update the counter
+    async function updateNumberOfUnpaidMembers() {
+        try {
+            const response = await fetch('/report/number-of-unpaid-members');
+            const data = await response.json();
+
+            const numberOfUnpaidMembersElement = document.getElementById('number-of-unpaid-members');
+            numberOfUnpaidMembersElement.textContent = data.numberOfUnpaidMembers;
+        } catch (error) {
+            console.error('Error updating number of unpaid members:', error);
+        }
+    }
+
+    // Call the function to update the number of unpaid members on page load
+    updateNumberOfUnpaidMembers();
+</script>
+
+<!-- Add this script to your reportUnpaidMembers.ejs file -->
+<!-- Include this script in your HTML file -->
+<script>
+    // Function to fetch the list of unpaid members and update the counter
+    async function updateNumberOfUnpaidMembers() {
+        try {
+            const response = await fetch('/members/unpaid'); // Update the route path
+            const data = await response.json();
+
+            const numberOfUnpaidMembersElement = document.getElementById('number-of-unpaid-members');
+            numberOfUnpaidMembersElement.textContent = data.unpaidMembersCount; // Update the property name
+        } catch (error) {
+            console.error('Error updating number of unpaid members:', error);
+        }
+    }
+
+    // Fetch and update the counter initially
+    updateNumberOfUnpaidMembers();
+
+    // Periodically update the counter (e.g., every 1 minute)
+    setInterval(updateNumberOfUnpaidMembers, 60000); // 60000 milliseconds = 1 minute
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Toggle sidebar on button click
+    $("#toggle-btn").click(function() {
+        $("#sidebar").toggleClass("active");
+        $("#content").toggleClass("active");
+    });
+    </script>
+
+</body>
+</html>

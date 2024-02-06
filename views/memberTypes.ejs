@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Types</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            max-width: 600px; /* Set a max-width for better responsiveness */
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ecf0f1;
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        div {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px; /* Set a max-width for better responsiveness */
+            margin: 10px 0;
+            transition: transform 0.3s ease;
+        }
+
+        div:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        a, button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover, button:hover {
+            background-color: #2980b9;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Member Types</h1>
+
+    <% if (memberTypes.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Member Type</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% memberTypes.forEach(memberType => { %>
+                    <tr>
+                        <td><h2><%= memberType.name %></h2></td>
+                        <td><p>Amount: <%= memberType.amount %></p></td>
+                        <td>
+                            <!-- Edit button with a link to the edit route -->
+                            <a href="/member-types/edit/<%= memberType._id %>">Edit</a>
+
+                            <!-- Delete button with a form to handle the delete request -->
+                            <form action="/member-types/delete/<%= memberType._id %>" method="POST" style="display: inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No member types available.</p>
+    <% } %>
+
+    <!-- Add any additional content or styling as needed -->
+</body>
+
+</html>

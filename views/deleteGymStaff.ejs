@@ -1,0 +1,18 @@
+<!-- views/deleteGymStaff.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary head elements -->
+</head>
+<body>
+    <h1>Delete Gym Staff Member</h1>
+    
+    <p>Are you sure you want to delete the gym staff member <%= staffMember.name %>?</p>
+
+    <form action="/gym-staff/delete/<%= staffMember._id %>" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+
+    <a href="/gym-staff">Cancel</a>
+</body>
+</html>

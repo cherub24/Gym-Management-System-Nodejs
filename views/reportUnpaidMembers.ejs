@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Add your head content here -->
+    <title>Unpaid Members Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ecf0f1;
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            font-size: 18px;
+            color: #3498db;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        p.payment-status {
+            color: #e74c3c;
+        }
+
+        p.payment-status.paid {
+            color: #2ecc71;
+        }
+
+        p.payment-status.expired {
+            color: #e67e22;
+        }
+
+        p.payment-status.not-paid-yet {
+            color: #c0392b;
+        }
+
+        .report-box {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Unpaid Members Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Member Name</th>
+                <th>Type</th>
+                <th>Payment Plan</th>
+                <th>Last Payment Date</th>
+                <th>Payment Status</th>
+                <th>Payment Expired Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% unpaidMembers.forEach(member => { %>
+                <tr>
+                    <td><strong><%= member.name %></strong></td>
+                    <td><%= member.type.name %></td>
+                    <td><%= member.paymentPlan.name %></td>
+                    <td><%= member.lastPaymentDateTime ? member.lastPaymentDateTime.toDateString() : 'Not Paid Yet' %></td>
+                    <td class="payment-status <%= member.isPaid ? 'paid' : member.expirationDate < currentDate ? 'expired' : 'not-paid-yet' %>">
+                        <%= member.isPaid ? 'Paid' : member.expirationDate < currentDate ? 'Expired' : 'Not Paid Yet' %>
+                    </td>
+                    <td><%= member.expirationDate.toDateString() %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <p>Total Unpaid Members: <%= unpaidMembersCount %></p>
+    <p>Current Date: <%= currentDate.toDateString() %></p>
+
+    <div id="number-of-unpaid-members-box" class="report-box">
+        <h4>Number of Unpaid Members</h4>
+        <p id="number-of-unpaid-members"><%= unpaidMembersCount %></p>
+    </div>
+    <!-- Add other content or scripts as needed -->
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Staff Counters</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ecf0f1;
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        div {
+            width: 50%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #34495e;
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Gym Staff Counters</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Counter</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><h2>Count of Gym Staff</h2></td>
+                <td><p><%= staffCount %></p></td>
+            </tr>
+            <tr>
+                <td><h2>Total Payroll of Gym Staff</h2></td>
+                <td><p><%= totalPayroll %> USD</p></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Income Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #34495e;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ecf0f1;
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #monthly-income-report {
+            color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Monthly Income Report</h1>
+    <p>Current Date: <%= currentDate.toDateString() %></p>
+
+    <% if (incomeData.members.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Member Name</th>
+                    <th>Last Payment Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% incomeData.members.forEach(member => { %>
+                    <tr>
+                        <td><%= member.name %></td>
+                        <td><%= member.lastPaymentDateTime ? member.lastPaymentDateTime.toDateString() : 'N/A' %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No income data available.</p>
+    <% } %>
+
+    <h1 id="monthly-income-report">Total Monthly Income: <%= incomeData.totalIncome %></h1>
+</body>
+
+</html>

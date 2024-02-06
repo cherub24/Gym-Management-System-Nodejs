@@ -1,0 +1,21 @@
+<!-- views/editMemberType.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary head elements -->
+</head>
+<body>
+    <h1>Edit Member Type</h1>
+
+    <form action="/member-types/edit/<%= memberType._id %>" method="POST">
+        <label for="name">Member Type:</label>
+        <input type="text" id="name" name="name" value="<%= memberType.name %>" required>
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" value="<%= memberType.amount %>" required>
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

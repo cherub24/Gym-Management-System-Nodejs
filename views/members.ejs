@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Include necessary head elements -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-bottom: 40px;
+    }
+
+    th, td {
+        border: 1px solid #ecf0f1;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        max-height: 100px;
+    }
+
+    form {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    input {
+        flex: 1;
+        padding: 8px;
+        margin-right: 10px;
+    }
+
+    button {
+        flex: 0 0 auto;
+        background-color: #2ecc71;
+        color: #fff;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #27ae60;
+    }
+
+    a {
+        display: inline-block;
+        margin: 5px;
+        padding: 8px 14px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    a.edit {
+        color: #fff;
+        background-color: #3498db;
+    }
+
+    a.delete {
+        color: #fff;
+        background-color: #e74c3c;
+    }
+
+    a:hover {
+        opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+        td, th {
+            padding: 10px;
+        }
+        button, a {
+            padding: 8px 12px;
+        }
+        form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <h1>Members List</h1>
+    <!-- Add this search form -->
+    <form action="/members/search" method="GET">
+        <label for="searchInput">Search:</label>
+        <input type="text" id="searchInput" name="q" placeholder="Enter name or phone number">
+        <button type="submit">Search</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Last Payment Date</th>
+                <th>Expiration Date</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% members.forEach(member => { %>
+                <tr>
+                    <td><%= member.name %></td>
+                    <td><%= member.type ? member.type.name : 'N/A' %></td>
+                    <td><%= member.lastPaymentDateTime ? member.lastPaymentDateTime.toLocaleString() : 'N/A' %></td>
+                    <td><%= member.expirationDate ? member.expirationDate.toLocaleString() : 'N/A' %></td>
+                    <td><%= member.phoneNumber || 'N/A' %></td>
+                    <td><%= member.address || 'N/A' %></td>
+                    <td>
+                        <% if (member.photo) { %>
+                            <img src="<%= member.photo %>" alt="Member Photo">
+                        <% } else { %>
+                            <span>No Photo</span>
+                        <% } %>
+                    </td>
+                    <td>
+                        <% if (!member.isPaid) { %>
+                            <form action="/members/mark-as-paid/<%= member._id %>" method="POST">
+                                <button type="submit">Mark as Paid</button>
+                            </form>
+                        <% } %>
+                        <a href="/members/edit/<%= member._id %>" class="edit">Edit</a>
+                        <a href="/members/delete/<%= member._id %>" class="delete">Delete</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

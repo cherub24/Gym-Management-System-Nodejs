@@ -1,0 +1,20 @@
+<!-- views/eurobicsMembers.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary head elements -->
+</head>
+<body>
+    <h1>Weight Lift Members List</h1>
+    <ul>
+        <% if (members.length > 0) { %>
+            <% members.forEach(member => { %>
+                <li><%= member.name %> - <%= member.type.name %></li>
+            <% }); %>
+        <% } else { %>
+            <li>No weightlift Members Found</li>
+        <% } %>
+    </ul>
+    
+</body>
+</html>

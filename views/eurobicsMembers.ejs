@@ -1,0 +1,94 @@
+<!-- views/eurobicsMembers.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eurobics Members List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .member-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #3498db;
+        }
+
+        .member-type {
+            color: #666;
+        }
+
+        p {
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Eurobics Members List</h1>
+    <div class="card-container">
+        <% if (members.length > 0) { %>
+            <% members.forEach(member => { %>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="member-name"><%= member.name %></div>
+                        <div class="member-type"><%= member.type.name %></div>
+                        <div class="member-type"><%= member.type.name %></div>
+                        <div class="member-type"><%= member.type.name %></div>
+
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No Eurobics Members Found</p>
+        <% } %>
+    </div>
+</body>
+
+</html>

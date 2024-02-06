@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Member</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px; /* Set a max-width for better responsiveness */
+            transition: transform 0.3s ease;
+            display: grid;
+            gap: 16px;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        label {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        button:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Create New Member</h1>
+
+    <form action="/members/new" method="POST">
+        <label for="name">Member Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="type">Member Type:</label>
+        <select id="type" name="type" required>
+            <% memberTypes.forEach(memberType => { %>
+                <option value="<%= memberType._id %>"><%= memberType.name %></option>
+            <% }); %>
+        </select>
+
+        <label for="paymentPlan">Payment Plan:</label>
+        <select name="paymentPlan" id="paymentPlan">
+            <!-- Populate the options dynamically based on your payment plans -->
+            <% paymentPlans.forEach(plan => { %>
+                <option value="<%= plan._id %>"><%= plan.name %></option>
+            <% }); %>
+        </select>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber">
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo">
+
+        <button type="submit">Create</button>
+    </form>
+
+</body>
+
+</html>

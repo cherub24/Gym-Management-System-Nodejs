@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paid Members</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ecf0f1;
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            font-size: 18px;
+            color: #3498db;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        .paid-members-count {
+            margin-top: 20px;
+            color: #2ecc71;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Paid Members</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Member Name</th>
+                <th>Type</th>
+                <th>Payment Plan</th>
+                <th>Last Payment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% paidMembers.forEach(member => { %>
+                <tr>
+                    <td><strong><%= member.name %></strong></td>
+                    <td><%= member.type ? member.type.name : 'N/A' %></td>
+                    <td><%= member.paymentPlan ? member.paymentPlan.name : 'N/A' %></td>
+                    <td><%= member.lastPaymentDateTime %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <p class="paid-members-count">Number of Paid Members: <%= paidMembersCount %></p>
+</body>
+
+</html>

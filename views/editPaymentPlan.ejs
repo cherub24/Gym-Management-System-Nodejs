@@ -1,0 +1,32 @@
+<!-- views/editPaymentPlan.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary head elements -->
+</head>
+<body>
+    <h1>Edit Payment Plan</h1>
+    
+    <form action="/payment-plans/edit/<%= paymentPlan._id %>" method="POST">
+        <label for="name">Plan Name:</label>
+        <input type="text" id="name" name="name" value="<%= paymentPlan.name %>" required>
+        
+        <label for="duration">Duration (months):</label>
+        <input type="number" id="duration" name="duration" value="<%= paymentPlan.duration %>" required>
+
+        <label for="memberType">Member Type:</label>
+        <select id="memberType" name="memberType" required>
+            <% memberTypes.forEach(memberType => { %>
+                <option value="<%= memberType._id %>" <%= paymentPlan.memberType && memberType._id.toString() === paymentPlan.memberType._id.toString() ? 'selected' : '' %>><%= memberType.name %></option>
+            <% }); %>
+        </select>
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" value="<%= paymentPlan.amount %>" required readonly>
+
+        <button type="submit">Update Payment Plan</button>
+    </form>
+
+    <!-- Add any additional content or styling as needed -->
+</body>
+</html>
